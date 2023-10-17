@@ -1,0 +1,55 @@
+LDPmn = Link Drugs to Proteins using multiplex networks.
+﻿﻿
+Execute: ./LDP + <parameters>
+
+  -----------------------------------------------------------------------------
+
+-Gene list that will be used in drug search:
+-f gene1/gene2
+
+Example: ./LDP -f ATXN1/ATXN3/ATXN7
+The example will perform the search using the ATXN1, ATN3, and ATXN7 genes.
+
+  -----------------------------------------------------------------------------
+
+-Parameters that evaluate the connection between genes (more info: string-db.org)
+Neighborhood: -nei 1
+Fusion: -fus 1
+Cooccurence: -coo 1
+Coexpression: -coe 1
+Experimental: -exp 1
+Database: -dat 1
+Textmining: -tex 1
+
+Example: ./LDP -f ATXN3 -fus 1 -coo 1 -dat 0
+The example will perform the search using the Fusion and Coexpression parameters.
+
+Standard: -nei 0 -fus 0 -coo 0 -coe 1 -exp 0 -dat 0 -tex 0
+
+  -----------------------------------------------------------------------------
+
+-Modify the distance from one gene to one of the input genes in the network. Distance equal to x will consider neighbors with a distance x to the target.
+-ni <level>
+
+Example: ./LDP -f ATXN3 -ni 2
+The example will perform the search using up to 2 neighbors of the ATXN3 gene
+
+Standard: -ni 3
+
+  -----------------------------------------------------------------------------
+
+-Minimum score a relationship must have to be considered on the network
+-li <threshold> with 0 <= threshold <= 1
+
+Example: ./LDP -f ATXN3 -li 0.2
+The example will perform the search using neighbors relationship score greater than 0.2
+
+Standard: -li 0.3
+
+  -------------------------------------------------- ---------------------------
+
+-Outputs: all files can be found in the "output" folder.
+
+graph.txt: generated graph, output file similar to an adjacency list, first and second columns name of the protein or drug found, third column score of this connection.
+medicines.txt: list of medicines connected or indirectly connected to the input proteins followed by the punctuation between the medicine and the entry.
+time.txt: time in milliseconds spent.

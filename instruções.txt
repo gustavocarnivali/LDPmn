@@ -1,0 +1,55 @@
+LDPmn = Link Drugs to Proteins using multiplex networks.
+﻿
+Execute com ./LDP + <parâmetros>
+
+  -----------------------------------------------------------------------------
+
+-Lista de genes que será utilizada na busca de drogas:
+-f gene1/gene2
+
+Exemplo: ./LDP -f ATXN1/ATXN3/ATXN7
+O exemplo irá realizar a busca utilizando os genes ATXN1, ATN3 E ATXN7
+
+  -----------------------------------------------------------------------------
+
+-Parametros que avaliam a conexão entre genes (mais informações: string-db.org)
+Neighborhood: -nei 1
+Fusion: -fus 1
+Cooccurence: -coo 1
+Coexpression: -coe 1
+Experimental: -exp 1
+Database: -dat 1
+Textmining: -tex 1
+
+Exemplo: ./LDP -f ATXN3 -fus 1 -coo 1 -dat 0
+O exemplo irá realizar a busca utilizando os parâmetros Fusion e Coexpression
+
+Padrão: -nei 0 -fus 0 -coo 0 -coe 1 -exp 0 -dat 0 -tex 0
+
+  -----------------------------------------------------------------------------
+
+-Modifica a distância de um gene a um dos genes de entrada na rede. Distância igual a x irá considerar vizinhos com uma distância x ao alvo.
+-ni <nível>
+
+Exemplo: ./LDP -f ATXN3 -ni 2
+O exemplo irá realizar a busca utilizando vizinhos com distancia até 2 do gene ATXN3
+
+Padrão: -ni 3
+
+  -----------------------------------------------------------------------------
+
+-Pontuação mínima que um relacionamento deve ter para ser considerado na rede
+-li <limiar> com 0 <= limiar <= 1
+
+Exemplo: ./LDP -f ATXN3 -li 0.2
+O exemplo irá realizar a busca utilizando vizinhos pontuação de relacionamento maior que 0.2
+
+Padrão: -li 0.3
+
+  -----------------------------------------------------------------------------
+
+-Saídas: todos os arquivos podem ser encontrados na pasta "output".
+
+graph.txt: grafo gerado, arquivo de saída semelhante a uma lista de adjacencia, primeira e segunda colunas nome da proteína ou medicamento encontrado, terceira coluna pontuação desta conexão.
+medicines.txt: lista de medicamentos conectados ou indiretamente conectados as proteínas de entrada seguido da pontuação entre o medicamento e a entrada.
+time.txt: tempo em milisecundos gasto.
